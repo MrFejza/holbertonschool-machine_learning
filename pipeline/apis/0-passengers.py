@@ -1,18 +1,30 @@
 #!/usr/bin/env python3
-#prototype
-# do python prototype 
-
+"""
+Create a method that returns the list of ships that can hold a given number
+of passengers
+"""
 import requests
 
+
 def availableShips(passengerCount):
+    """
+    Returns the list of ships that can hold a given number of passengers
+    :param passengerCount: number of passengers
+    :return: If no ship available, return an empty list
+    """
+    url = "https://swapi-api.hbtn.io/api/starships/"
+    r = requests.get(url)
+    json = r.json()
+    results = json["results"]
     ships = []
-    base_url = 'https://swapi-api.hbtn.io/api/starships'
-    while base_url is not None:
-        response = requests.get(base_url)
-        data = response.json()
-        for ship in data['results']:
-            passengers = ship['passengers']
-            if passengers.isnumeric() and int(passengers) >= passengerCount:
-                ships.append(ship['name'])
-        base_url = data['next']
+    while json["next"]:
+        for res in results:
+            if res["passengers"] == 'n/a' or res["passengers"] == 'unknown':
+                continue
+            if int(res["passengers"].replace(',', '')) >= passengerCount:
+                ships.append(res["name"])
+        url = json["next"]
+        r = requests.get(url)
+        json = r.json()
+        results = json["results"]
     return ships
