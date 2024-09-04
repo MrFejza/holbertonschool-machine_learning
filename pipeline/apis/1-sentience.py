@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 Defines methods to ping the Star Wars API and return the list of home planets
 for all sentient species
@@ -31,3 +32,4 @@ def sentientPlanets():
                 planet = requests.get(url).json()
                 homePlanets.append(planet.get('name'))
     return homePlanets
+    

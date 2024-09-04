@@ -6,3 +6,4 @@ sentientPlanets = __import__('1-sentience').sentientPlanets
 planets = sentientPlanets()
 for planet in planets:
     print(planet)
+    
