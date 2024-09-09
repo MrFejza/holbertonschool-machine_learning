@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 """
 Uses the (unofficial) SpaceX API to print the upcoming launch as:
 <launch name> (<date>) <rocket name> - <launchpad name> (<launchpad locality>)
